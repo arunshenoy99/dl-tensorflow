@@ -34,7 +34,16 @@ print('Total training images for humans ', len(train_human_names))
 print('total validation horse images:', len(os.listdir(validation_horse_dir)))
 print('total validation human images:', len(os.listdir(validation_human_dir)))
 
-train_datagen = ImageDataGenerator(rescale=1/255)  # All images will be rescaled by 1./255
+train_datagen = ImageDataGenerator(
+    rescale=1/255,
+    rotation_range=40,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest'
+)  # All images will be rescaled by 1./255
 validation_datagen = ImageDataGenerator(rescale=1/255)
 
 # Flow training images in batches of 128 using train_datagen generator
