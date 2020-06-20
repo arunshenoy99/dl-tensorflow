@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 sentences = [
     'I love my dog',
@@ -18,6 +19,8 @@ tokenizer.fit_on_texts(sentences)
 word_index = tokenizer.word_index
 sequences = tokenizer.texts_to_sequences(sentences)
 test_sequences = tokenizer.texts_to_sequences(test_data)
+padded = pad_sequences(sequences, padding = 'post', truncating = 'post', maxlen = 5) #add zeroes after data, maxlen specifies all seq of maxlen only, for sentences longer than maxlen truncate from end 
 print(word_index)
 print(sequences)
 print(test_sequences)
+print(padded)
