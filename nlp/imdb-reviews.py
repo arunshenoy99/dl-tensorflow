@@ -52,3 +52,17 @@ model.fit(
     epochs = 10,
     validation_data = (testing_padded, testing_labels_final)
 )
+
+#Generate tsv file for tensorflow projector
+reverse_word_index = dict([(value, key) for (key, value) in word_index.items()])
+import io
+
+out_v = io.open('vecs.tsv', 'w', encoding='utf-8')
+out_m = io.open('meta.tsv', 'w', encoding='utf-8')
+for word_num in range(1, vocab_size):
+  word = reverse_word_index[word_num]
+  embeddings = weights[word_num]
+  out_m.write(word + "\n")
+  out_v.write('\t'.join([str(x) for x in embeddings]) + "\n")
+out_v.close()
+out_m.close()
