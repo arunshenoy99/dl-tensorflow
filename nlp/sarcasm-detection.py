@@ -56,3 +56,7 @@ model.compile(loss='binary_crossentropy',optimizer='adam',metrics=['accuracy'])
 
 num_epochs = 30
 history = model.fit(training_padded, training_labels, epochs=num_epochs, validation_data=(testing_padded, testing_labels), verbose=2)
+sentence = ["granny starting to fear spiders in the garden might be real", "game of thrones season finale showing this sunday night"]
+sequences = tokenizer.texts_to_sequences(sentence)
+padded = pad_sequences(sequences, maxlen=max_length, padding=padding_type, truncating=trunc_type)
+print(model.predict(padded))
